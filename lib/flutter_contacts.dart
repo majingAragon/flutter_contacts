@@ -291,6 +291,25 @@ class FlutterContacts {
       config.includeNonVisibleOnAndroid,
       config.includeNotesOnIos13AndAbove,
     ]);
+
+    return await _dealContactsData(untypedContacts,
+        withProperties: withProperties,
+        withThumbnail: withThumbnail,
+        withAccounts: withAccounts,
+        withPhoto: withPhoto,
+        withGroups: withGroups,
+        sorted: sorted,
+        deduplicateProperties: deduplicateProperties);
+  }
+
+  static Future<List<Contact>> _dealContactsData(List untypedContacts,
+      {bool withProperties = false,
+      bool withThumbnail = false,
+      bool withPhoto = false,
+      bool withGroups = false,
+      bool withAccounts = false,
+      bool sorted = true,
+      bool deduplicateProperties = true}) async {
     // ignore: omit_local_variable_types
     List<Contact> contacts = untypedContacts
         .map((x) => Contact.fromJson(Map<String, dynamic>.from(x)))
